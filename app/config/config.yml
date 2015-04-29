@@ -21,5 +21,7 @@ doctrine:
 
     orm:
         default_entity_manager: default
-
-
+        auto_mapping: true
+        mappings:
+          BespokeSupportDocumentStorageBundle:
+            is_bundle: true

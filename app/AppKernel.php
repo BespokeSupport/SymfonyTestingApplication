@@ -10,26 +10,44 @@ class AppKernel extends Kernel
 {
     protected $debug = true;
 
+    /**
+     * @var array
+     */
+    protected $loadedBundles = [];
+
+    /**
+     * @return array
+     */
+    public function getLoadedBundles()
+    {
+        return $this->loadedBundles;
+    }
+
+
     public function registerBundles()
     {
-	    $bundles = array();
+	    $bundles = [];
     	$bundles[] = new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
 	    $bundles[] = new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle();
 
-        $files = glob(dirname(__FILE__).'/../../src/*/*Bundle.php');
-
+        /*
+         * Load in bundles based on the PSR4 style directories
+         */
+        $path = dirname(__FILE__).'/../../../../src/';
+        $realPath = realpath($path);
+        $files = glob($realPath.'*/*Bundle.php');
         foreach ($files as $file) {
             $classes = $this->classes($file);
             if (count($classes) && $classes['namespace'] && $classes['class']) {
-                require_once($file);
+                require_once ($file);
                 $classString = $classes['namespace'] .'\\'. $classes['class'];
-                $bundles[] = new $classString;
+                $this->loadedBundles[] = new $classString;
             }
         }
 
-        return $bundles;
+        $allBundles = array_merge($bundles, $this->loadedBundles);
+        return $allBundles;
     }
-
 
     public function classes($filePath)
     {
