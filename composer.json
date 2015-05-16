@@ -13,7 +13,8 @@
         "php" : ">5.4",
         "symfony/symfony" : "~2.6",
         "doctrine/orm" : "~2.4",
-        "doctrine/doctrine-bundle" : "~1.3"
+        "doctrine/doctrine-bundle" : "~1.3",
+        "phpunit/phpunit": "~4"
     },
     "bin":[
       "app/symfony-test-console"
