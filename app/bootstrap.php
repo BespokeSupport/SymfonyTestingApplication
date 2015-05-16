@@ -11,3 +11,5 @@ if (file_exists(dirname(__FILE__) . '/../../../../vendor/autoload.php')) {
 }
 
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
+
+return $loader;

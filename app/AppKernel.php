@@ -16,6 +16,11 @@ class AppKernel extends Kernel
     protected $loadedBundles = [];
 
     /**
+     * @var array
+     */
+    protected $loadedBundlesPaths = [];
+
+    /**
      * @return array
      */
     public function getLoadedBundles()
@@ -39,6 +44,10 @@ class AppKernel extends Kernel
         foreach ($files as $file) {
             $classes = $this->classes($file);
             if (count($classes) && $classes['namespace'] && $classes['class']) {
+                $info = pathinfo($file);
+                if ($info && isset($info['dirname'])) {
+                    $this->loadedBundlesPaths[] = $info['dirname'];
+                }
                 require_once ($file);
                 $classString = $classes['namespace'] .'\\'. $classes['class'];
                 $this->loadedBundles[] = new $classString;
@@ -93,6 +102,15 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+
+        /*
+         * If the loaded bundle has a config - load it
+         */
+        foreach ($this->loadedBundlesPaths as $path) {
+            if (file_exists($path.'/../app/config/config_'.$this->getEnvironment().'.yml')){
+                $loader->load($path.'/../app/config/config_'.$this->getEnvironment().'.yml');
+            }
+        }
     }
 
     /**
