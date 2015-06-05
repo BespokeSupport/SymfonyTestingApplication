@@ -1,4 +1,12 @@
 <?php
+/**
+ * Symfony Test Application for Bundles
+ * PHP Version 5.3
+ *
+ * @author   Richard Seymour <web@bespoke.support>
+ * @license  MIT
+ * @link     https://github.com/BespokeSupport/SymfonyTestApplication
+ */
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -28,7 +36,9 @@ class AppKernel extends Kernel
         return $this->loadedBundles;
     }
 
-
+    /**
+     * @return array
+     */
     public function registerBundles()
     {
 	    $bundles = [];
@@ -58,6 +68,10 @@ class AppKernel extends Kernel
         return $allBundles;
     }
 
+    /**
+     * @param $filePath
+     * @return array
+     */
     public function classes($filePath)
     {
         $fp = fopen($filePath, 'r');
@@ -97,8 +111,9 @@ class AppKernel extends Kernel
         ];
     }
 
-
-
+    /**
+     * @param LoaderInterface $loader
+     */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
@@ -120,6 +135,7 @@ class AppKernel extends Kernel
     {
         return __DIR__.'/../tmp/'.$this->getEnvironment();
     }
+
     /**
      * @return string
      */
