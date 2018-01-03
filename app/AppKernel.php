@@ -8,6 +8,8 @@
  * @link     https://github.com/BespokeSupport/SymfonyTestApplication
  */
 
+namespace BespokeSupport\SymfonyAppTest;
+
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
