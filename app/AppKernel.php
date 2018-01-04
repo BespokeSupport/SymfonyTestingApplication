@@ -10,6 +10,7 @@
 
 namespace BespokeSupport\SymfonyAppTest;
 
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -46,6 +47,7 @@ class AppKernel extends Kernel
     {
         $bundles = [];
         $bundles[] = new FrameworkBundle();
+        $bundles[] = new DoctrineBundle();
 
         /*
          * Load in bundles based on the PSR4 style directories

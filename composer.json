@@ -15,14 +15,15 @@
         }
     },
     "require" : {
-        "php" : "~5.4|^7",
-        "symfony/framework-bundle" : "~2.3|3.*|4.*",
-        "symfony/finder" : "2.*|3.*|4.*",
-        "symfony/console" : "2.*|3.*|4.*",
-        "doctrine/common" : "2.*|3.*|4.*"
+        "php" : "~5.4|~7",
+        "symfony/framework-bundle" : "~2.3|~3|~4",
+        "symfony/finder" : "~2|~3|~4",
+        "symfony/console" : "~2|~3|~4",
+        "doctrine/common" : "~2|~3|~4",
+        "doctrine/doctrine-bundle" : "@stable"
     },
     "suggest": {
-        "doctrine/common" : "2.*|3.*|4.*"
+        "doctrine/common" : "~2|~3|~4"
 
     },
     "bin":[
