@@ -1,7 +1,7 @@
 <?php
 /**
  * Symfony Test Application for Bundles
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @author   Richard Seymour <web@bespoke.support>
  * @license  MIT
@@ -10,6 +10,7 @@
 
 namespace BespokeSupport\SymfonyAppTest;
 
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -43,9 +44,8 @@ class AppKernel extends Kernel
      */
     public function registerBundles()
     {
-	    $bundles = [];
-    	$bundles[] = new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
-	    $bundles[] = new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle();
+        $bundles = [];
+        $bundles[] = new FrameworkBundle();
 
         /*
          * Load in bundles based on the PSR4 style directories
@@ -115,10 +115,13 @@ class AppKernel extends Kernel
 
     /**
      * @param LoaderInterface $loader
+     * @throws \Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load(__DIR__.'/config/config.php', 'php');
+
+        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.php', 'php');
 
         /*
          * If the loaded bundle has a config - load it
